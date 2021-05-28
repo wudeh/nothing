@@ -1,0 +1,66 @@
+{{ extend '../modelHtml/model.html'}}{{ block 'head'}} {{ /block }} {{ block 'content' }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="list-group">
+                <li class="list-group-item disabled">用户设置</li>
+                <li class="list-group-item "><a href="">基本信息</a></li>
+                <li class="list-group-item"><a href="">账户设置</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <p>头像设置</p>
+            <img src="{{ user.avatar }}" alt="" width="100" height="100">
+            <form action="/avatar" method="post" enctype="multipart/form-data">
+                <input type="submit" value="提交" class="btn btn-success">
+                <input type="file" name="avatar" id="upfile">
+            </form>
+
+        </div>
+        <div class="col-md-5">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">邮箱</label> {{ if user }}
+                    <p>{{ user.email }}</p>
+                    {{ else }}
+                    <p>emai@example.com</p>
+                    {{ /if }}
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">个人介绍</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">生日</label>
+                    <input type="text" class="form-control" id="exampleFormControlTextarea1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">昵称</label>
+                    <input type="text" name="nickname" class="form-control" cols="1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">性别</label>
+                    <div>
+                        <label class="radio-inline">
+                                    <input class="man" type="radio" name="gender" id="inlineRadio1" value="0"> 男
+                                  </label>
+                        <label class="radio-inline">
+                                    <input class="women" type="radio" name="gender" id="inlineRadio2" value="1"> 女
+                                  </label>
+                        <label class="radio-inline">
+                                        <input class="women" type="radio" name="gender" id="inlineRadio2" value="1"> 保密
+                                      </label>
+                    </div>
+                </div>
+                <button type="button" class="form-control btn-success">保存</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{ /block }}
+{{ block 'script' }}
+<script>
+    
+</script>
+{{ /block }}

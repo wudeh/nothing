@@ -1,0 +1,50 @@
+{{ extend '../modelHtml/model.html'}} {{ block 'content' }}
+
+<body>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form class="form-signin" id="login_form">
+                    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+                    <label for="inputEmail" class="sr-only">邮箱</label>
+                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="inputPassword" class="sr-only">密码</label>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+                    <a class="float-left" href="">忘记密码？点我</a>
+                    <a class="float-right" href="/register">没有账号？请注册</a>
+                    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function() {
+            $('#login_form').on('submit', function(e) {
+                e.preventDefault()
+                var formData = $(this).serialize()
+                $.ajax({
+                    type: "post",
+                    url: "/login",
+                    data: formData,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.err_code === 0) {
+                            window.location.href = '/'
+                        } else if (response.err_code === 1) {
+                            alert('邮箱或者密码错误')
+                        } else if (response.err_code === 500) {
+                            alert('服务器忙，请稍后再试')
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+</body>
+
+
+
+{{ /block }}
